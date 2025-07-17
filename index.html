@@ -4,32 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SurvIQ - Soluții AI Avansate pentru Retail și Securitate</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   <style>
     /* Reset și baza */
     :root {
-      --primary: #00f7ff;
+      --primary: #00f7ff; /* Cyan electric */
       --primary-dark: #00c2cb;
-      --primary-light: #00f7ff33;
-      --dark: #010a12;
-      --darker: #00070d;
-      --light: #e0f7ff;
-      --accent: #ff2d75;
+      --primary-light: #00f7ff33; /* Cyan cu opacitate */
+      --dark: #010a12; /* Aproape negru, cu o tentă albastră */
+      --darker: #00070d; /* Negru pur */
+      --light: #e0f7ff; /* Albastru foarte deschis */
+      --accent: #ff2d75; /* Roz electric */
       --accent-dark: #d4004e;
+      --secondary-accent: #8a2be2; /* Violet electric pentru un plus de "wow" */
     }
-    
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    
+
     body, html {
       font-family: 'Montserrat', sans-serif;
       background: var(--darker);
@@ -38,47 +41,55 @@
       scroll-behavior: smooth;
       line-height: 1.6;
     }
-    
+
     h1, h2, h3, h4 {
       font-family: 'Orbitron', sans-serif;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
-    
+
     a {
       color: var(--primary);
       text-decoration: none;
       transition: all 0.3s ease;
     }
-    
+
     a:hover {
       color: var(--primary-dark);
       text-shadow: 0 0 10px var(--primary-light);
     }
-    
+
     .container {
       width: 100%;
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 20px;
     }
-    
+
     section {
       padding: 100px 0;
       position: relative;
     }
-    
+
     .section-title {
-      text-align: center;
-      font-size: 2.8rem;
-      margin-bottom: 70px;
-      color: var(--primary);
-      position: relative;
-      display: inline-block;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 70px;
+  color: var(--primary);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Gradient de text și umbre îmbunătățite */
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 8px var(--primary-light),
+    0 0 16px var(--primary-light);
+}
+
+
     .section-title::after {
       content: '';
       position: absolute;
@@ -87,8 +98,9 @@
       width: 100%;
       height: 3px;
       background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      box-shadow: 0 0 10px var(--primary);
     }
-    
+
     .btn {
       display: inline-block;
       padding: 15px 35px;
@@ -102,45 +114,62 @@
       border: none;
       cursor: pointer;
       font-size: 1rem;
+      z-index: 1;
     }
-    
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: all 0.4s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
     .btn-primary {
       background: var(--primary);
       color: var(--dark);
       box-shadow: 0 0 15px var(--primary-light);
     }
-    
+
     .btn-primary:hover {
       background: var(--primary-dark);
       box-shadow: 0 0 25px var(--primary-light);
       transform: translateY(-3px);
     }
-    
+
     .btn-accent {
       background: var(--accent);
       color: white;
       box-shadow: 0 0 15px rgba(255, 45, 117, 0.5);
     }
-    
+
     .btn-accent:hover {
       background: var(--accent-dark);
       box-shadow: 0 0 25px rgba(255, 45, 117, 0.7);
       transform: translateY(-3px);
     }
-    
+
     .btn-outline {
       background: transparent;
       color: var(--primary);
       border: 2px solid var(--primary);
       box-shadow: 0 0 15px var(--primary-light);
     }
-    
+
     .btn-outline:hover {
       background: var(--primary-light);
       box-shadow: 0 0 25px var(--primary-light);
       transform: translateY(-3px);
     }
-    
+
     /* Loader */
     #loader {
       position: fixed;
@@ -155,16 +184,16 @@
       z-index: 9999;
       transition: opacity 0.5s, visibility 0.5s;
     }
-    
+
     #loader.loaded {
       opacity: 0;
       visibility: hidden;
     }
-    
+
     .loader-content {
       text-align: center;
     }
-    
+
     .spinner {
       width: 70px;
       height: 70px;
@@ -174,7 +203,7 @@
       animation: spin 1s linear infinite;
       margin: 0 auto 20px;
     }
-    
+
     .loader-text {
       color: var(--primary);
       font-family: 'Orbitron', sans-serif;
@@ -182,12 +211,12 @@
       letter-spacing: 3px;
       text-transform: uppercase;
     }
-    
+
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    
+
     /* Navbar */
     nav {
       position: fixed;
@@ -202,55 +231,126 @@
       -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(0, 247, 255, 0.1);
     }
-    
+
     nav.scrolled {
       padding: 15px 0;
       background: rgba(1, 10, 18, 0.95);
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     }
-    
+
     .nav-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    
+
     .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary);
-      text-decoration: none;
       display: flex;
       align-items: center;
+      gap: 14px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 2.8rem;
+      color: #00f7ff;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      user-select: none;
+      position: relative;
+      background: linear-gradient(90deg, #00f7ff 0%, #004d59 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow:
+        0 0 4px #00f7ffaa,
+        0 0 8px #00f7ffcc,
+        0 0 14px #00f7ffdd,
+        0 0 20px #004d59dd;
+      animation: text-glow 3s ease-in-out infinite alternate;
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
-    
-    .logo span {
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      background: var(--primary);
-      border-radius: 50%;
-      margin-right: 10px;
-      box-shadow: 0 0 10px var(--primary);
-      animation: pulse 2s infinite;
+
+    .shield-svg {
+      width: 56px;
+      height: 56px;
+      stroke-linejoin: round;
+      filter:
+        drop-shadow(0 0 8px #00f7ffaa)
+        drop-shadow(0 0 16px #00f7ffcc);
+      animation: pulse-glow 3s ease-in-out infinite alternate;
+      position: relative;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      overflow: visible;
     }
-    
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+
+    .shine {
+      animation: shine-move 2.5s linear infinite;
+      mix-blend-mode: screen;
+      opacity: 0.7;
     }
-    
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo:hover .shield-svg {
+      animation-play-state: paused;
+      transform-origin: center;
+      animation: oscillate-rotate 1.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse-glow {
+      0% {
+        filter:
+          drop-shadow(0 0 5px #00f7ff88)
+          drop-shadow(0 0 10px #00f7ffbb);
+      }
+      100% {
+        filter:
+          drop-shadow(0 0 20px #00f7ffdd)
+          drop-shadow(0 0 30px #00f7ffee);
+      }
+    }
+
+    @keyframes oscillate-rotate {
+      0% { transform: rotate(0deg) scale(1.1);}
+      50% { transform: rotate(7deg) scale(1.15);}
+      100% { transform: rotate(0deg) scale(1.1);}
+    }
+
+    @keyframes shine-move {
+      0% {
+        transform: translateX(-64px);
+      }
+      100% {
+        transform: translateX(64px);
+      }
+    }
+
+    @keyframes text-glow {
+      0% {
+        text-shadow:
+          0 0 3px #00f7ff99,
+          0 0 10px #00f7ffbb,
+          0 0 15px #00f7ffcc;
+      }
+      100% {
+        text-shadow:
+          0 0 10px #00f7ffbb,
+          0 0 25px #00f7ffdd,
+          0 0 40px #00f7ffee;
+      }
+    }
+
     .nav-links {
       display: flex;
       list-style: none;
     }
-    
+
     .nav-links li {
       margin-left: 30px;
     }
-    
+
     .nav-links a {
       font-weight: 600;
       font-size: 0.95rem;
@@ -258,7 +358,7 @@
       position: relative;
       padding: 5px 0;
     }
-    
+
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -269,16 +369,16 @@
       background: var(--primary);
       transition: width 0.3s ease;
     }
-    
+
     .nav-links a:hover::after {
       width: 100%;
     }
-    
+
     .nav-links .btn {
       padding: 10px 25px;
       font-size: 0.9rem;
     }
-    
+
     .mobile-menu-btn {
       display: none;
       background: none;
@@ -287,7 +387,7 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
-    
+
     /* Hero Section */
     .hero {
       height: 100vh;
@@ -298,7 +398,7 @@
       overflow: hidden;
       background: linear-gradient(135deg, #001a26 0%, #00070d 100%);
     }
-    
+
     .hero::before {
       content: '';
       position: absolute;
@@ -310,42 +410,55 @@
       opacity: 0.15;
       z-index: 1;
     }
-    
+
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 800px;
+      max-width: 900px; /* Mărit pentru textul mai lung */
       margin: 0 auto;
       text-align: center;
       padding: 0 20px;
     }
-    
+
     .hero h1 {
       font-size: 4.5rem;
       margin-bottom: 20px;
       line-height: 1.2;
       text-shadow: 0 0 20px var(--primary-light);
       animation: glow 2s infinite alternate;
+      min-height: 120px; /* Asigură spațiu pentru efectul de typing */
+    }
+
+    /* Efect de typing */
+    .typing::after {
+      content: '|';
+      display: inline-block;
+      animation: blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--primary); }
     }
     
     @keyframes glow {
       from { text-shadow: 0 0 10px var(--primary-light); }
       to { text-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary-light); }
     }
-    
+
     .hero p {
       font-size: 1.3rem;
       margin-bottom: 40px;
       color: rgba(224, 247, 255, 0.8);
     }
-    
+
     .hero-buttons {
       display: flex;
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
     }
-    
+
     .hero-scroll {
       position: absolute;
       bottom: 40px;
@@ -357,26 +470,32 @@
       color: var(--primary);
       cursor: pointer;
       z-index: 2;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
     }
-    
+
+    .hero-scroll:hover {
+      opacity: 1;
+    }
+
     .hero-scroll span {
       display: block;
       margin-bottom: 10px;
       font-size: 0.9rem;
       letter-spacing: 2px;
     }
-    
+
     .hero-scroll i {
       font-size: 1.5rem;
       animation: bounce 2s infinite;
     }
-    
+
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
       40% { transform: translateY(-20px); }
       60% { transform: translateY(-10px); }
     }
-    
+
     /* Particles */
     #particles-js {
       position: absolute;
@@ -386,15 +505,15 @@
       height: 100%;
       z-index: 1;
     }
-    
+
     /* Features Section */
-    .features {
+    .features, .solutions {
       background: var(--dark);
       position: relative;
       overflow: hidden;
     }
-    
-    .features::before {
+
+    .features::before, .solutions::before {
       content: '';
       position: absolute;
       top: 0;
@@ -405,7 +524,7 @@
       background-size: cover;
       z-index: 0;
     }
-    
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -413,7 +532,7 @@
       position: relative;
       z-index: 1;
     }
-    
+
     .feature-card {
       background: rgba(1, 20, 30, 0.6);
       border-radius: 15px;
@@ -422,8 +541,10 @@
       border: 1px solid rgba(0, 247, 255, 0.1);
       position: relative;
       overflow: hidden;
+      /* Efect de bordură luminoasă la hover */
+      box-shadow: 0 0 0 rgba(0, 247, 255, 0); /* Initial transparent */
     }
-    
+
     .feature-card::before {
       content: '';
       position: absolute;
@@ -434,37 +555,43 @@
       background: linear-gradient(135deg, rgba(0, 247, 255, 0.05) 0%, transparent 100%);
       z-index: -1;
     }
-    
+
     .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(0, 247, 255, 0.2);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(0, 247, 255, 0.2), 0 0 20px var(--primary); /* Adaugă glow */
       border-color: rgba(0, 247, 255, 0.3);
     }
-    
+
     .feature-icon {
       font-size: 2.5rem;
       color: var(--primary);
       margin-bottom: 20px;
       display: inline-block;
+      transition: transform 0.3s ease;
     }
-    
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1);
+      color: var(--secondary-accent); /* Schimbă culoarea iconiței la hover */
+    }
+
     .feature-card h3 {
       font-size: 1.5rem;
       margin-bottom: 15px;
       color: var(--primary);
     }
-    
+
     .feature-card p {
       color: rgba(224, 247, 255, 0.7);
     }
-    
+
     /* Stats Section */
     .stats {
       background: linear-gradient(135deg, #001a26 0%, #00070d 100%);
       text-align: center;
       padding: 80px 0;
     }
-    
+
     .stats-container {
       display: flex;
       justify-content: space-around;
@@ -472,7 +599,7 @@
       gap: 30px;
       margin-top: 60px;
     }
-    
+
     .stat-item {
       flex: 1;
       min-width: 200px;
@@ -482,12 +609,12 @@
       border: 1px solid rgba(0, 247, 255, 0.1);
       transition: all 0.3s ease;
     }
-    
+
     .stat-item:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0, 247, 255, 0.1);
     }
-    
+
     .stat-number {
       font-size: 3.5rem;
       font-weight: 700;
@@ -495,20 +622,20 @@
       margin-bottom: 10px;
       font-family: 'Orbitron', sans-serif;
     }
-    
+
     .stat-label {
       font-size: 1.1rem;
       color: rgba(224, 247, 255, 0.8);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    
+
     /* Pricing Section */
     .pricing {
       background: var(--dark);
       position: relative;
     }
-    
+
     .pricing::after {
       content: '';
       position: absolute;
@@ -518,13 +645,13 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--primary), transparent);
     }
-    
+
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
     }
-    
+
     .pricing-card {
       background: rgba(1, 20, 30, 0.6);
       border-radius: 15px;
@@ -535,13 +662,13 @@
       position: relative;
       overflow: hidden;
     }
-    
-    .pricing-card.popular {
+
+    .pricing-card.featured { /* Renamed from .popular for clarity */
       border-color: var(--accent);
       box-shadow: 0 0 30px rgba(255, 45, 117, 0.2);
     }
-    
-    .popular-label {
+
+    .pricing-badge { /* Renamed from .popular-label */
       position: absolute;
       top: 0;
       right: 30px;
@@ -554,13 +681,13 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    
+
     .pricing-card h3 {
       font-size: 1.5rem;
       margin-bottom: 20px;
       color: var(--primary);
     }
-    
+
     .price {
       font-size: 3rem;
       font-weight: 700;
@@ -568,74 +695,91 @@
       margin-bottom: 20px;
       font-family: 'Orbitron', sans-serif;
     }
-    
+
     .price span {
       font-size: 1rem;
       color: rgba(224, 247, 255, 0.7);
     }
-    
+
     .pricing-features {
       list-style: none;
       margin-bottom: 30px;
     }
-    
+
     .pricing-features li {
       padding: 10px 0;
       border-bottom: 1px solid rgba(0, 247, 255, 0.1);
       color: rgba(224, 247, 255, 0.7);
     }
-    
+
     .pricing-features li:last-child {
       border-bottom: none;
     }
-    
+
     .pricing-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 247, 255, 0.2);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0, 247, 255, 0.2), 0 0 20px var(--primary);
     }
-    
+
     /* Testimonials Section */
     .testimonials {
       background: linear-gradient(135deg, #001a26 0%, #00070d 100%);
     }
-    
+
     .testimonials .section-title {
       margin-bottom: 50px;
     }
-    
+
     .swiper {
       width: 100%;
       padding: 50px 0;
     }
-    
+
     .swiper-slide {
       background: rgba(1, 20, 30, 0.6);
       border-radius: 15px;
       padding: 40px;
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
       border: 1px solid rgba(0, 247, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 250px; /* Asigură o înălțime minimă */
     }
-    
+
+    .testimonial-content {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: rgba(224, 247, 255, 0.9);
+      margin-bottom: 25px;
+    }
        
+    .author-info-wrapper {
+      display: flex;
+      align-items: center;
+      margin-top: auto; /* Împinge autorul jos */
+    }
+
     .author-avatar {
-      width: 50px;
-      height: 50px;
+      width: 60px; /* Mărit */
+      height: 60px; /* Mărit */
       border-radius: 50%;
       margin-right: 15px;
       object-fit: cover;
-      border: 2px solid var(--primary);
+      border: 3px solid var(--primary); /* Bordură mai groasă */
+      box-shadow: 0 0 10px var(--primary-light);
     }
     
     .author-info h4 {
-      font-size: 1.1rem;
+      font-size: 1.2rem; /* Mărit */
       color: var(--primary);
       margin-bottom: 5px;
       font-family: 'Montserrat', sans-serif;
     }
     
     .author-info p {
-      font-size: 0.9rem;
-      color: rgba(224, 247, 255, 0.6);
+      font-size: 0.95rem; /* Mărit */
+      color: rgba(224, 247, 255, 0.7);
     }
     
     .swiper-pagination-bullet {
@@ -651,128 +795,129 @@
     .swiper-button-prev {
       color: var(--primary);
     }
-    
-/* Contact Section */
-.contact {
-  background: var(--dark);
-  position: relative;
-}
 
-/* Fundal SVG foarte subtil, fără a bloca click-urile */
-.contact::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(0, 247, 255, 0.03)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
-  background-size: cover;
-  z-index: 0;
-  pointer-events: none;  /* <--- Permite interacțiunea cu formularul */
-}
+    /* Contact Section */
+    .contact {
+      background: var(--dark);
+      position: relative;
+    }
 
-.contact-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 50px;
-  position: relative;
-  z-index: 1;
-}
+    .contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(0, 247, 255, 0.03)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+      background-size: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-.contact-info {
-  display: flex;
-  flex-direction: column;
-}
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 50px;
+      position: relative;
+      z-index: 1;
+    }
 
-.contact-info h3 {
-  font-size: 1.8rem;
-  color: var(--primary);
-  margin-bottom: 30px;
-}
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px; /* Spațiu între cardurile de info */
+    }
 
-.contact-details {
-  margin-bottom: 40px;
-}
+    .info-card {
+      background: rgba(1, 20, 30, 0.6);
+      border-radius: 15px;
+      padding: 30px;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: all 0.3s ease;
+    }
 
-.contact-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0, 247, 255, 0.1);
+    }
 
-.contact-icon {
-  width: 50px;
-  height: 50px;
-  background: rgba(0, 247, 255, 0.1);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 15px;
-  color: var(--primary);
-  font-size: 1.2rem;
-}
+    .info-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(0, 247, 255, 0.15);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--primary);
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
 
-.contact-text h4 {
-  font-size: 1.1rem;
-  color: white;
-  margin-bottom: 5px;
-  font-family: 'Montserrat', sans-serif;
-}
+    .info-card h3 {
+      font-size: 1.3rem;
+      color: white; /* Titlul cardului de info */
+      margin-bottom: 5px;
+      font-family: 'Montserrat', sans-serif;
+    }
 
-.contact-text p,
-.contact-text a {
-  color: rgba(224, 247, 255, 0.7);
-  font-size: 0.95rem;
-}
+    .info-card p,
+    .info-card a {
+      color: rgba(224, 247, 255, 0.7);
+      font-size: 0.95rem;
+    }
 
-/* Asigură că formularul stă deasupra fundalului și poate fi folosit */
-.contact-form {
-  position: relative;
-  z-index: 10;
-}    
     .social-links {
       display: flex;
       gap: 15px;
+      margin-top: 30px; /* Spațiu de la info */
     }
-    
+
     .social-link {
-      width: 40px;
-      height: 40px;
+      width: 45px; /* Mărit */
+      height: 45px; /* Mărit */
       background: rgba(0, 247, 255, 0.1);
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       color: var(--primary);
+      font-size: 1.2rem;
       transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 247, 255, 0.2);
     }
-    
+
     .social-link:hover {
       background: var(--primary);
       color: var(--dark);
-      transform: translateY(-5px);
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 0 20px var(--primary);
     }
-    
+
     .contact-form {
       background: rgba(1, 20, 30, 0.6);
       border-radius: 15px;
       padding: 40px;
       border: 1px solid rgba(0, 247, 255, 0.1);
+      position: relative;
+      z-index: 10;
     }
-    
+
     .form-group {
       margin-bottom: 20px;
     }
-    
+
     .form-group label {
       display: block;
       margin-bottom: 8px;
       color: var(--primary);
       font-weight: 600;
     }
-    
+
     .form-control {
       width: 100%;
       padding: 15px;
@@ -783,18 +928,18 @@
       font-family: 'Montserrat', sans-serif;
       transition: all 0.3s ease;
     }
-    
+
     .form-control:focus {
       outline: none;
       border-color: var(--primary);
       box-shadow: 0 0 10px rgba(0, 247, 255, 0.2);
     }
-    
+
     textarea.form-control {
       min-height: 150px;
       resize: vertical;
     }
-    
+
     /* Footer */
     footer {
       background: #00070d;
@@ -802,7 +947,7 @@
       text-align: center;
       position: relative;
     }
-    
+
     .footer-logo {
       font-family: 'Orbitron', sans-serif;
       font-size: 2rem;
@@ -811,7 +956,7 @@
       margin-bottom: 30px;
       display: inline-block;
     }
-    
+
     .footer-links {
       display: flex;
       justify-content: center;
@@ -819,22 +964,22 @@
       gap: 20px;
       margin-bottom: 30px;
     }
-    
+
     .footer-links a {
       color: rgba(224, 247, 255, 0.7);
       font-size: 0.9rem;
     }
-    
+
     .footer-links a:hover {
       color: var(--primary);
     }
-    
+
     .copyright {
       color: rgba(224, 247, 255, 0.5);
       font-size: 0.8rem;
       margin-top: 30px;
     }
-    
+
     .back-to-top {
       position: fixed;
       bottom: 30px;
@@ -853,29 +998,224 @@
       visibility: hidden;
       transition: all 0.3s ease;
       z-index: 999;
+      box-shadow: 0 0 15px var(--primary-light);
     }
-    
-    .back-to-top.active {
+
+    .back-to-top.show { /* Changed from .active for consistency with original script */
       opacity: 1;
       visibility: visible;
     }
-    
+
     .back-to-top:hover {
       background: var(--primary-dark);
       transform: translateY(-5px);
+      box-shadow: 0 0 25px var(--primary);
     }
-    
-    /* Animations */
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0px); }
+
+    /* Custom Message Box */
+    .message-box-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    
-    .floating {
-      animation: float 6s ease-in-out infinite;
+
+    .message-box-overlay.show {
+      opacity: 1;
+      visibility: visible;
     }
-    
+
+    .message-box-content {
+      background: var(--dark);
+      border: 1px solid var(--primary);
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 0 30px var(--primary-light);
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .message-box-overlay.show .message-box-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .message-box-content h3 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .message-box-content p {
+      color: var(--light);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .message-box-content .btn {
+      padding: 10px 30px;
+    }
+
+    /* AI Chat Modal Styles */
+    .ai-chat-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10001;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .ai-chat-modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .ai-chat-modal-content {
+      background: var(--dark);
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 40px var(--primary-light);
+      transform: scale(0.9);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ai-chat-modal-overlay.show .ai-chat-modal-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .ai-chat-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 247, 255, 0.1);
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+
+    .ai-chat-modal-header h3 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .ai-chat-close-btn {
+      background: none;
+      border: none;
+      color: var(--light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .ai-chat-close-btn:hover {
+      color: var(--accent);
+    }
+
+    .ai-chat-messages {
+      flex-grow: 1;
+      background: rgba(0, 247, 255, 0.05);
+      border-radius: 10px;
+      padding: 15px;
+      min-height: 200px;
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid rgba(0, 247, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ai-chat-message {
+      background: rgba(0, 247, 255, 0.1);
+      padding: 10px 15px;
+      border-radius: 15px;
+      align-self: flex-start;
+      max-width: 85%;
+      word-wrap: break-word;
+      color: var(--light);
+      font-size: 0.95rem;
+    }
+
+    .ai-chat-message.user {
+      background: var(--secondary-accent);
+      align-self: flex-end;
+      color: white;
+    }
+
+    .ai-chat-input-area {
+      display: flex;
+      gap: 10px;
+    }
+
+    .ai-chat-input {
+      flex-grow: 1;
+      padding: 12px 15px;
+      background: rgba(0, 247, 255, 0.08);
+      border: 1px solid rgba(0, 247, 255, 0.2);
+      border-radius: 10px;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .ai-chat-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(0, 247, 255, 0.2);
+    }
+
+    .ai-chat-send-btn {
+      padding: 12px 20px;
+      background: var(--primary);
+      color: var(--dark);
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      border: none;
+    }
+
+    .ai-chat-send-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    .ai-chat-loading {
+        text-align: center;
+        padding: 10px;
+        color: var(--primary);
+        font-style: italic;
+    }
+
+
     /* Responsive */
     @media (max-width: 992px) {
       .hero h1 {
@@ -902,7 +1242,7 @@
         align-items: center;
         padding: 20px 0;
         clip-path: circle(0px at 90% -10%);
-        -webkit-clip-path: circle(0px at 90% -10%);
+        -webkit-clip-path: circle(1000px at 90% -10%);
         transition: all 0.5s ease-out;
         pointer-events: none;
       }
@@ -919,6 +1259,7 @@
       
       .hero h1 {
         font-size: 2.8rem;
+        min-height: 90px; /* Ajustează pentru dimensiunea fontului */
       }
       
       .hero p {
@@ -933,11 +1274,30 @@
       .btn {
         width: 100%;
       }
+
+      .contact-info {
+        gap: 20px;
+      }
+
+      .info-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .info-icon {
+        margin-bottom: 15px;
+      }
+
+      .ai-chat-modal-content {
+        width: 95%;
+        padding: 20px;
+      }
     }
     
     @media (max-width: 576px) {
       .hero h1 {
         font-size: 2.2rem;
+        min-height: 70px;
       }
       
       .section-title {
@@ -951,129 +1311,30 @@
       .stat-number {
         font-size: 2.5rem;
       }
+
+      .pricing-card {
+        padding: 30px 20px;
+      }
+
+      .price {
+        font-size: 2.5rem;
+      }
+
+      .swiper-slide {
+        padding: 30px;
+      }
+
+      .author-avatar {
+        width: 50px;
+        height: 50px;
+      }
     }
-
-
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  font-size: 2.8rem;
-  color: #00f7ff;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  user-select: none;
-  position: relative;
-  /* Gradient text + shadows */
-  background: linear-gradient(90deg, #00f7ff 0%, #004d59 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow:
-    0 0 4px #00f7ffaa,
-    0 0 8px #00f7ffcc,
-    0 0 14px #00f7ffdd,
-    0 0 20px #004d59dd;
-  animation: text-glow 3s ease-in-out infinite alternate;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-/* Pulsating glow on shield */
-.shield-svg {
-  width: 56px;
-  height: 56px;
-  stroke-linejoin: round;
-  filter:
-    drop-shadow(0 0 8px #00f7ffaa)
-    drop-shadow(0 0 16px #00f7ffcc);
-  animation: pulse-glow 3s ease-in-out infinite alternate;
-  position: relative;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-  overflow: visible;
-}
-
-/* Shine effect */
-.shine {
-  animation: shine-move 2.5s linear infinite;
-  mix-blend-mode: screen;
-  opacity: 0.7;
-}
-
-/* Hover animations */
-.logo:hover {
-  transform: scale(1.05);
-}
-
-.logo:hover .shield-svg {
-  animation-play-state: paused;
-  transform-origin: center;
-  animation: oscillate-rotate 1.2s ease-in-out infinite alternate;
-}
-
-.logo:hover .shine {
-  opacity: 1;
-  animation-duration: 1.2s;
-}
-
-/* Pulsating glow animation */
-@keyframes pulse-glow {
-  0% {
-    filter:
-      drop-shadow(0 0 5px #00f7ff88)
-      drop-shadow(0 0 10px #00f7ffbb);
-  }
-  100% {
-    filter:
-      drop-shadow(0 0 20px #00f7ffdd)
-      drop-shadow(0 0 30px #00f7ffee);
-  }
-}
-
-/* Oscillating rotate on hover */
-@keyframes oscillate-rotate {
-  0% { transform: rotate(0deg) scale(1.1);}
-  50% { transform: rotate(7deg) scale(1.15);}
-  100% { transform: rotate(0deg) scale(1.1);}
-}
-
-/* Shine moving left to right */
-@keyframes shine-move {
-  0% {
-    transform: translateX(-64px);
-  }
-  100% {
-    transform: translateX(64px);
-  }
-}
-
-/* Text glow pulsating */
-@keyframes text-glow {
-  0% {
-    text-shadow:
-      0 0 3px #00f7ff99,
-      0 0 10px #00f7ffbb,
-      0 0 15px #00f7ffcc;
-  }
-  100% {
-    text-shadow:
-      0 0 10px #00f7ffbb,
-      0 0 25px #00f7ffdd,
-      0 0 40px #00f7ffee;
-  }
-}
-
-
-
   </style>
 </head>
 <body>
 
   <!-- Loader -->
-  <div id="loader" class="loaded">
+  <div id="loader">
     <div class="loader-content">
       <div class="spinner"></div>
       <div class="loader-text">SURVIQ</div>
@@ -1083,32 +1344,29 @@
   <!-- Navbar -->
   <nav id="navbar">
     <div class="container nav-container">
+      <a href="#" class="logo" aria-label="SurvIQ - Soluții AI Avansate">
+        <svg class="shield-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="shield-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00f7ff"/>
+              <stop offset="100%" stop-color="#004d59"/>
+            </linearGradient>
+            <linearGradient id="shine-gradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+              <stop offset="50%" stop-color="rgba(255,255,255,0.6)" />
+              <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+            </linearGradient>
+            <mask id="shine-mask" x="0" y="0" width="64" height="64" maskUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="64" height="64" fill="url(#shine-gradient)" />
+            </mask>
+          </defs>
+          <path d="M32 2 L12 14 V32 C12 48 32 62 32 62 C32 62 52 48 52 32 V14 L32 2 Z" fill="url(#shield-gradient)" stroke="#00f7ff" stroke-width="2"/>
+          <rect class="shine" x="-64" y="0" width="64" height="64" fill="white" mask="url(#shine-mask)" />
+        </svg>
+        SURVIQ
+      </a>
 
-
-     <a href="#" class="logo" aria-label="SurvIQ - Soluții AI Avansate">
-  <svg class="shield-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-    <defs>
-      <linearGradient id="shield-gradient" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#00f7ff"/>
-        <stop offset="100%" stop-color="#004d59"/>
-      </linearGradient>
-      <linearGradient id="shine-gradient" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="rgba(255,255,255,0)" />
-        <stop offset="50%" stop-color="rgba(255,255,255,0.6)" />
-        <stop offset="100%" stop-color="rgba(255,255,255,0)" />
-      </linearGradient>
-      <mask id="shine-mask" x="0" y="0" width="64" height="64" maskUnits="userSpaceOnUse">
-        <rect x="0" y="0" width="64" height="64" fill="url(#shine-gradient)" />
-      </mask>
-    </defs>
-    <path d="M32 2 L12 14 V32 C12 48 32 62 32 62 C32 62 52 48 52 32 V14 L32 2 Z" fill="url(#shield-gradient)" stroke="#00f7ff" stroke-width="2"/>
-    <!-- Shine effect rect moving across -->
-    <rect class="shine" x="-64" y="0" width="64" height="64" fill="white" mask="url(#shine-mask)" />
-  </svg>
-  SURVIQ
-</a>
-
-      <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
         <i class="fas fa-bars"></i>
       </button>
       <ul class="nav-links" id="navLinks">
@@ -1124,14 +1382,15 @@
   <section class="hero">
     <div id="particles-js"></div>
     <div class="hero-content">
-      <h1>Inteligenta Artificiala pentru Retail si Securitate</h1>
-      <p>Transformăm datele video în informații acționabile pentru afaceri mai sigure și mai profitabile</p>
-      <div class="hero-buttons">
+      <h1 id="hero-title"></h1> <!-- Titlul va fi generat cu efect de typing -->
+      <p data-aos="fade-up" data-aos-delay="600">Transformăm datele video în informații acționabile pentru afaceri mai sigure și mai profitabile</p>
+      <div class="hero-buttons" data-aos="fade-up" data-aos-delay="800">
         <a href="#contact" class="btn btn-primary">Începe acum</a>
-        <a href="#features" class="btn btn-outline">Află mai multe</a>
+        <!-- Changed to open AI Chat Modal -->
+        <a href="#" id="openAIChatBtn" class="btn btn-outline">Află mai multe</a>
       </div>
     </div>
-    <div class="hero-scroll" id="heroScroll">
+    <div class="hero-scroll" id="heroScroll" data-aos="fade-up" data-aos-delay="1000">
       <span>Derulează</span>
       <i class="fas fa-chevron-down"></i>
     </div>
@@ -1140,47 +1399,35 @@
   <!-- Features Section -->
   <section class="features" id="features">
     <div class="container">
-      <h2 class="section-title">Tehnologia Noastră</h2>
+      <h2 class="section-title" data-aos="fade-up">Tehnologia Noastră</h2>
       <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-robot"></i>
-          </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-icon"><i class="fas fa-robot"></i></div>
           <h3>Recunoaștere Facială AI</h3>
           <p>Identifică automat clienții fideli, persoanele suspecte sau angajații cu o acuratețe de peste 98%.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
           <h3>Analiză Avansată</h3>
           <p>Monitorizează fluxul clienților, timpii de așteptare și zonele cele mai frecventate în timp real.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-exclamation-triangle"></i>
-          </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-icon"><i class="fas fa-exclamation-triangle"></i></div>
           <h3>Alertă Comportament</h3>
           <p>Detectează automat comportamente suspecte sau situații de urgență pentru intervenție imediată.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-mobile-alt"></i>
-          </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
           <h3>Notificări Realtime</h3>
           <p>Primești alerte instant pe telefon sau email pentru evenimente critice.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-cloud"></i>
-          </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="feature-icon"><i class="fas fa-cloud"></i></div>
           <h3>Stocare Cloud</h3>
           <p>Toate datele sunt stocate securizat în cloud cu acces oriunde, oricând.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-cogs"></i>
-          </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+          <div class="feature-icon"><i class="fas fa-cogs"></i></div>
           <h3>Integrări Personalizate</h3>
           <p>Conectare ușoară cu sistemele tale existente (POS, CRM, etc.).</p>
         </div>
@@ -1190,421 +1437,698 @@
 
   <!-- Stats Section -->
   <section class="stats" id="stats">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">Impactul Nostru</h2>
+    <div class="stats-container">
+      <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
+        <div class="stat-number" id="clientCounter">0</div>
+        <div class="stat-label">Clienți Mulțumiți</div>
+      </div>
+      <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+        <div class="stat-number" id="projectCounter">0</div>
+        <div class="stat-label">Proiecte Finalizate</div>
+      </div>
+      <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+        <div class="stat-number" id="cameraCounter">0</div>
+        <div class="stat-label">Camere Monitorizate</div>
+      </div>
+      <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
+        <div class="stat-number" id="dataCounter">0</div>
+        <div class="stat-label">TB Date Analizate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Solutions Section -->
+  <section class="solutions" id="solutions">
     <div class="container">
-      <h2 class="section-title">Impactul Nostru</h2>
-      <div class="stats-container">
-        <div class="stat-item">
-          <div class="stat-number" id="clientCounter">0</div>
-          <div class="stat-label">Clienți Mulțumiți</div>
+      <h2 class="section-title" data-aos="fade-up">Soluții Specializate</h2>
+      <div class="features-grid">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-icon"><i class="fas fa-store"></i></div>
+          <h3>Retail Analytics</h3>
+          <p>Optimizează-ti spațiul comercial cu analize avansate ale fluxului clienților, heatmaps și conversie.</p>
         </div>
-        <div class="stat-item">
-          <div class="stat-number" id="projectCounter">0</div>
-          <div class="stat-label">Proiecte Finalizate</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Securitate Avansată</h3>
+          <p>Sisteme de recunoaștere facială și detectare a comportamentelor suspecte în timp real.</p>
         </div>
-        <div class="stat-item">
-          <div class="stat-number" id="cameraCounter">0</div>
-          <div class="stat-label">Camere Monitorizate</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-icon"><i class="fas fa-warehouse"></i></div>
+          <h3>Management Logistic</h3>
+          <p>Monitorizare inteligentă a stocurilor și a fluxului de mărfuri în depozite.</p>
         </div>
-        <div class="stat-item">
-          <div class="stat-number" id="dataCounter">0</div>
-          <div class="stat-label">TB Date Analizate</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+          <h3>Customer Insights</h3>
+          <p>Identifică tipare de cumpărare și personalizează experiența clienților.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="feature-icon"><i class="fas fa-traffic-light"></i></div>
+          <h3>Smart Traffic</h3>
+          <p>Analiză avansată a traficului pentru centre comerciale și spații publice.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+          <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+          <h3>Soluții Personalizate</h3>
+          <p>Dezvoltăm sisteme tailor-made pentru nevoile specifice ale afacerii tale.</p>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 50px;" data-aos="fade-up" data-aos-delay="700">
+        <a href="#contact" class="btn btn-primary">Solicită o demonstrație</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Opțiuni de Prețuri</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Alege pachetul care se potrivește nevoilor tale</p>
+      
+      <div class="pricing-grid">
+        <div class="pricing-card" data-aos="flip-left" data-aos-delay="200">
+          <div class="pricing-header">
+            <h3>Starter</h3>
+            <div class="price">
+              <span class="amount">€99</span>
+              <span class="period">/lună</span>
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Monitorizare până la 5 camere</li>
+            <li><i class="fas fa-check"></i> Analytics de bază</li>
+            <li><i class="fas fa-check"></i> Suport tehnic prin email</li>
+            <li><i class="fas fa-check"></i> Actualizări lunare</li>
+          </ul>
+          <!-- Removed "Alege Planul" button -->
+        </div>
+        
+        <div class="pricing-card featured" data-aos="flip-up" data-aos-delay="300">
+          <div class="pricing-badge">Popular</div>
+          <div class="pricing-header">
+            <h3>Business</h3>
+            <div class="price">
+              <span class="amount">€299</span>
+              <span class="period">/lună</span>
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Monitorizare până la 20 camere</li>
+            <li><i class="fas fa-check"></i> Analytics avansate</li>
+            <li><i class="fas fa-check"></i> Suport prioritar 24/7</li>
+            <li><i class="fas fa-check"></i> Rapoarte personalizate</li>
+          </ul>
+          <!-- Removed "Alege Planul" button -->
+        </div>
+        
+        <div class="pricing-card" data-aos="flip-right" data-aos-delay="400">
+          <div class="pricing-header">
+            <h3>Enterprise</h3>
+            <div class="price">
+              <span class="amount">Personalizat</span>
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check"></i> Soluții tailor-made</li>
+            <li><i class="fas fa-check"></i> Număr nelimitat de camere</li>
+            <li><i class="fas fa-check"></i> Integrări personalizate</li>
+            <li><i class="fas fa-check"></i> Manager dedicat</li>
+            <li><i class="fas fa-check"></i> Training pentru echipă</li>
+          </ul>
+          <!-- Removed "Alege Planul" button -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Solutions Section -->
-<section class="solutions" id="solutions">
-  <div class="container">
-    <h2 class="section-title">Soluții Specializate</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-store"></i>
-        </div>
-        <h3>Retail Analytics</h3>
-        <p>Optimizează-ti spațiul comercial cu analize avansate ale fluxului clienților, heatmaps și conversie.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        <h3>Securitate Avansată</h3>
-        <p>Sisteme de recunoaștere facială și detectare a comportamentelor suspecte în timp real.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-warehouse"></i>
-        </div>
-        <h3>Management Logistic</h3>
-        <p>Monitorizare inteligentă a stocurilor și a fluxului de mărfuri în depozite.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-user-tie"></i>
-        </div>
-        <h3>Customer Insights</h3>
-        <p>Identifică tipare de cumpărare și personalizează experiența clienților.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-traffic-light"></i>
-        </div>
-        <h3>Smart Traffic</h3>
-        <p>Analiză avansată a traficului pentru centre comerciale și spații publice.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-cogs"></i>
-        </div>
-        <h3>Soluții Personalizate</h3>
-        <p>Dezvoltăm sisteme tailor-made pentru nevoile specifice ale afacerii tale.</p>
-      </div>
-    </div>
-    <div style="text-align: center; margin-top: 50px;">
-      <a href="#contact" class="btn btn-primary">Solicită o demonstrație</a>
-    </div>
-  </div>
-</section>
-
-
-<!-- Pricing Section -->
-<section class="pricing" id="pricing">
-  <div class="container">
-    <h2 class="section-title">Opțiuni de Prețuri</h2>
-    <p class="section-subtitle">Alege pachetul care se potrivește nevoilor tale</p>
-    
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="pricing-header">
-          <h3>Starter</h3>
-          <div class="price">
-            <span class="amount">€99</span>
-            <span class="period">/lună</span>
-          </div>
-        </div>
-        <ul class="pricing-features">
-          <li><i class="fas fa-check"></i> Monitorizare până la 5 camere</li>
-          <li><i class="fas fa-check"></i> Analytics de bază</li>
-          <li><i class="fas fa-check"></i> Suport tehnic prin email</li>
-          <li><i class="fas fa-check"></i> Actualizări lunare</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline">Alege Planul</a>
-      </div>
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Ce Spun Clienții Noștri</h2>
       
-      <div class="pricing-card featured">
-        <div class="pricing-badge">Popular</div>
-        <div class="pricing-header">
-          <h3>Business</h3>
-          <div class="price">
-            <span class="amount">€299</span>
-            <span class="period">/lună</span>
+      <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <p class="testimonial-content">"SurvIQ a transformat modul în care gestionăm securitatea în magazinele noastre. Recunoașterea facială este incredibil de precisă și ne-a ajutat să reducem furturile semnificativ."</p>
+            <div class="author-info-wrapper">
+              <img src="https://placehold.co/60x60/00f7ff/010a12?text=JD" alt="Avatar John Doe" class="author-avatar">
+              <div class="author-info">
+                <h4>John Doe</h4>
+                <p>Manager Operațional, Retail Corp</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <p class="testimonial-content">"Analizele de trafic oferite de SurvIQ sunt esențiale pentru optimizarea layout-ului centrului nostru comercial. Vedem exact unde petrec clienții cel mai mult timp."</p>
+            <div class="author-info-wrapper">
+              <img src="https://placehold.co/60x60/ff2d75/ffffff?text=AM" alt="Avatar Ana Maria" class="author-avatar">
+              <div class="author-info">
+                <h4>Ana Maria Popescu</h4>
+                <p>Director Marketing, MegaMall</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <p class="testimonial-content">"Suportul tehnic este rapid și eficient. Am avut câteva întrebări inițiale, dar echipa SurvIQ a fost mereu acolo pentru a ne ghida."</p>
+            <div class="author-info-wrapper">
+              <img src="https://placehold.co/60x60/8a2be2/ffffff?text=VB" alt="Avatar Vlad B." class="author-avatar">
+              <div class="author-info">
+                <h4>Vlad Bălan</h4>
+                <p>Proprietar, Lanț de Supermarketuri</p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <p class="testimonial-content">"Integrarea cu sistemele noastre existente a fost surprinzător de ușoară. Acum avem o imagine de ansamblu completă a operațiunilor noastre."</p>
+            <div class="author-info-wrapper">
+              <img src="https://placehold.co/60x60/00c2cb/010a12?text=EA" alt="Avatar Elena A." class="author-avatar">
+              <div class="author-info">
+                <h4>Elena Andrei</h4>
+                <p>Specialist Logistică, Depozit Central</p>
+              </div>
+            </div>
           </div>
         </div>
-        <ul class="pricing-features">
-          <li><i class="fas fa-check"></i> Monitorizare până la 20 camere</li>
-          <li><i class="fas fa-check"></i> Analytics avansate</li>
-          <li><i class="fas fa-check"></i> Suport prioritar 24/7</li>
-          <li><i class="fas fa-check"></i> Rapoarte personalizate</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary">Alege Planul</a>
-      </div>
-      
-      <div class="pricing-card">
-        <div class="pricing-header">
-          <h3>Enterprise</h3>
-          <div class="price">
-            <span class="amount">Personalizat</span>
-          </div>
-        </div>
-        <ul class="pricing-features">
-          <li><i class="fas fa-check"></i> Soluții tailor-made</li>
-          <li><i class="fas fa-check"></i> Număr nelimitat de camere</li>
-          <li><i class="fas fa-check"></i> Integrări personalizate</li>
-          <li><i class="fas fa-check"></i> Manager dedicat</li>
-          <li><i class="fas fa-check"></i> Training pentru echipă</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline">Contactează-ne</a>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-<!-- Contact Section -->
-<section class="contact" id="contact">
-  <div class="container">
-    <h2 class="section-title">Contactează-ne</h2>
-    <p class="section-subtitle">Suntem aici să răspundem la orice întrebare ai avea</p>
-    
-    <div class="contact-grid">
-      <div class="contact-info">
-        <div class="info-card">
-          <div class="info-icon">
-            <i class="fas fa-map-marker-alt"></i>
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Contactează-ne</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Suntem aici să răspundem la orice întrebare ai avea</p>
+      
+      <div class="contact-grid">
+        <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h3>Adresă</h3>
+              <p>Strada Tehnologiei nr. 42<br>Cluj-Napoca, România</p>
+            </div>
           </div>
-          <h3>Adresă</h3>
-          <p>Strada Tehnologiei nr. 42<br>Cluj-Napoca, România</p>
+          
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+            <div>
+              <h3>Telefon</h3>
+              <p>+40 123 456 789<br>Luni-Vineri: 9:00-17:00</p>
+            </div>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h3>Email</h3>
+              <p><a href="mailto:contact@companiedvs.ro">contact@companiedvs.ro</a><br><a href="mailto:suport@companiedvs.ro">suport@companiedvs.ro</a></p>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
         </div>
         
-        <div class="info-card">
-          <div class="info-icon">
-            <i class="fas fa-phone-alt"></i>
-          </div>
-          <h3>Telefon</h3>
-          <p>+40 123 456 789<br>Luni-Vineri: 9:00-17:00</p>
+        <div class="contact-form" data-aos="fade-left" data-aos-delay="200">
+          <form id="contactForm">
+            <div class="form-group">
+              <input type="text" id="name" name="name" placeholder="Nume complet" required>
+            </div>
+           
+            <div class="form-group">
+              <input type="tel" id="phone" name="phone" placeholder="Număr de telefon (Opțional)">
+            </div>
+            <div class="form-group">
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Alege un serviciu</option>
+                <option value="retail">Retail Analytics</option>
+                <option value="security">Securitate Avansată</option>
+                <option value="logistics">Management Logistic</option>
+                <option value="custom">Soluții Personalizate</option>
+                <option value="other">Altceva</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea id="message" name="message" rows="5" placeholder="Emailul tau + detalii..." required></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Trimite Mesaj</button>
+            </div>
+          </form>
         </div>
-        
-        <div class="info-card">
-          <div class="info-icon">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <h3>Email</h3>
-          <p>contact@companiedvs.ro<br>suport@companiedvs.ro</p>
-        </div>
-      </div>
-      
-      <div class="contact-form">
-        <form id="contactForm">
-          <div class="form-group">
-            <input type="text" id="name" name="name" placeholder="Nume complet" required>
-          </div>
-          <div class="form-group">
-            <input type="email" id="email" name="email" placeholder="Adresă de email" required>
-          </div>
-          <div class="form-group">
-            <input type="tel" id="phone" name="phone" placeholder="Număr de telefon">
-          </div>
-          <div class="form-group">
-            <select id="service" name="service" required>
-              <option value="" disabled selected>Alege un serviciu</option>
-              <option value="retail">Retail Analytics</option>
-              <option value="security">Securitate Avansată</option>
-              <option value="logistics">Management Logistic</option>
-              <option value="custom">Soluții Personalizate</option>
-              <option value="other">Altceva</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <textarea id="message" name="message" rows="5" placeholder="Mesajul tău..." required></textarea>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Trimite Mesaj</button>
-          </div>
-        </form>
       </div>
     </div>
+  </section>
+
+  <!-- Map Section -->
+  <div class="map-container" data-aos="fade-up">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2732.843747373947!2d23.62387631559391!3d46.76996647913819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47490c1e0b1a0aab%3A0xbb6e9a0b48a4f9e3!2sStrada%20Tehnologiei%2042%2C%20Cluj-Napoca%20400000!5e0!3m2!1sen!2sro!4v1620000000000!5m2!1sen!2sro" 
+            width="100%" height="450" style="border:0; filter: grayscale(100%) invert(90%) hue-rotate(180deg) brightness(80%) contrast(120%);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
-</section>
 
-<!-- Map Section -->
-<div class="map-container">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2732.843747373947!2d23.62387631559391!3d46.76996647913819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47490c1e0b1a0aab%3A0xbb6e9a0b48a4f9e3!2sStrada%20Tehnologiei%2042%2C%20Cluj-Napoca%20400000!5e0!3m2!1sen!2sro!4v1620000000000!5m2!1sen!2sro" 
-          width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-</div>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <a href="#" class="footer-logo">SURVIQ</a>
+      <div class="footer-links">
+        <a href="#features">Caracteristici</a>
+        <a href="#solutions">Soluții</a>
+        <a href="#pricing">Prețuri</a>
+        <a href="#contact">Contact</a>
+        <a href="#">Politica de Confidențialitate</a>
+        <a href="#">Termeni și Condiții</a>
+      </div>
+      <p class="copyright">&copy; 2023 SurvIQ. Toate drepturile rezervate.</p>
+    </div>
+  </footer>
 
-<!-- Scripts librării externe -->
-<script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <!-- Back to Top Button -->
+  <div class="back-to-top" id="backToTop" aria-label="Back to top" role="button" tabindex="0">
+    <i class="fas fa-arrow-up"></i>
+  </div>
 
-<!-- Scripturi personalizate -->
-<script>
-  // Loader: ascunde loader-ul când pagina e gata
-  window.addEventListener('load', function() {
-    const loader = document.getElementById('loader');
-    if (loader) loader.classList.add('loaded');
-  });
+  <!-- Custom Message Box HTML -->
+  <div class="message-box-overlay" id="messageBoxOverlay">
+    <div class="message-box-content">
+      <h3 id="messageBoxTitle"></h3>
+      <p id="messageBoxText"></p>
+      <button class="btn btn-primary" id="messageBoxCloseBtn">OK</button>
+    </div>
+  </div>
 
-  // Toggle meniu mobil
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const navLinks = document.getElementById('navLinks');
-  
-  if (mobileMenuBtn && navLinks) {
-    mobileMenuBtn.addEventListener('click', function() {
-      navLinks.classList.toggle('active');
-      this.innerHTML = navLinks.classList.contains('active') 
-        ? '<i class="fas fa-times"></i>' 
-        : '<i class="fas fa-bars"></i>';
+  <!-- AI Chat Modal HTML -->
+  <div class="ai-chat-modal-overlay" id="aiChatModalOverlay">
+    <div class="ai-chat-modal-content">
+      <div class="ai-chat-modal-header">
+        <h3>Întreabă AI-ul SurvIQ</h3>
+        <button class="ai-chat-close-btn" id="aiChatCloseBtn"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="ai-chat-messages" id="aiChatMessages">
+        <div class="ai-chat-message">Salut! Sunt AI-ul SurvIQ. Cu ce te pot ajuta astăzi?</div>
+      </div>
+      <div class="ai-chat-input-area">
+        <input type="text" id="aiChatInput" class="ai-chat-input" placeholder="Scrie mesajul tău aici...">
+        <button id="aiChatSendBtn" class="ai-chat-send-btn">Trimite</button>
+      </div>
+      <div id="aiChatLoading" class="ai-chat-loading" style="display: none;">AI-ul gândește...</div>
+    </div>
+  </div>
+
+  	<!-- EmailJS SDK v4+ non-module -->
+	<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+	<!-- Alte librării externe -->
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Scripturi personalizate -->
+  <script>
+    // Inițializare AOS (Animate On Scroll)
+    AOS.init({
+      duration: 1000, // Durata animațiilor în ms
+      once: true,     // Animațiile se declanșează o singură dată la derulare
+      mirror: false,  // Animațiile nu se inversează la derularea înapoi
     });
-  }
 
-  // Scroll lin pentru link-uri ancoră
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (navLinks) navLinks.classList.remove('active');
-      if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    // Funcție pentru efectul de typing
+    function typeWriter(elementId, text, i = 0, speed = 50) {
+      const element = document.getElementById(elementId);
+      if (!element) return;
 
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-
-  // Navbar efect scroll + back to top button
-  window.addEventListener('scroll', function() {
-    const navbar = document.getElementById('navbar');
-    if (navbar) {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
+      if (i < text.length) {
+        element.classList.add('typing'); // Adaugă clasa pentru cursor
+        element.innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(elementId, text, i + 1, speed), speed);
       } else {
-        navbar.classList.remove('scrolled');
+        element.classList.remove('typing'); // Elimină clasa pentru cursor la final
       }
     }
 
-    const backToTop = document.querySelector('.back-to-top');
-    if (backToTop) {
-      if (window.scrollY > 300) {
-        backToTop.classList.add('active');
-      } else {
-        backToTop.classList.remove('active');
+    // Loader: ascunde loader-ul când pagina e gata și pornește typing effect
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.classList.add('loaded');
+        // După ce loader-ul dispare, pornește efectul de typing
+        setTimeout(() => {
+          typeWriter('hero-title', 'Inteligența Artificială pentru Retail și Securitate');
+        }, 600); // Așteaptă puțin după ce loader-ul a dispărut
       }
-    }
-  });
 
-  // Animare counter
-  function animateCounter(element, target, duration = 2000) {
-    if (!element) return;
-    const start = 0;
-    const increment = target / (duration / 16);
-    let current = start;
+      // Inițializare EmailJS
+      emailjs.init('0CQMCeTNMgQIoir_T'); // public key-ul tău
+
+      // Contact form handling
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+          event.preventDefault();
+
+          // Validare simplă suplimentară
+          const name = document.getElementById('name').value.trim();
+          const email = 'marasescu_alex@yahoo.com';
+          const service = document.getElementById('service').value;
+          const message = document.getElementById('message').value.trim();
+
+          if (!name || !email || !service || !message) {
+            showMessageBox('Eroare', 'Te rugăm să completezi toate câmpurile obligatorii.', false);
+            return;
+          }
+
+          // Trimite formularul folosind EmailJS
+          emailjs.sendForm('service_sakkbup', 'template_v8y6hhd', this)
+          .then(function() {
+            showMessageBox('Succes!', 'Mesajul a fost trimis cu succes! Echipa noastră te va contacta în cel mai scurt timp.', true);
+            contactForm.reset();
+          }, function(error) {
+            console.error('Eroare la trimiterea mesajului:', error);
+            showMessageBox('Eroare', 'A apărut o eroare la trimiterea mesajului. Te rugăm să încerci din nou mai târziu.', false);
+          });
+        });
+      }
+    });
+
+    // Toggle meniu mobil
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
     
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        clearInterval(timer);
-        current = target;
-      }
-      element.textContent = Math.floor(current).toLocaleString();
-    }, 16);
-  }
+    if (mobileMenuBtn && navLinks) {
+      mobileMenuBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        this.innerHTML = navLinks.classList.contains('active') 
+          ? '<i class="fas fa-times"></i>' 
+          : '<i class="fas fa-bars"></i>';
+      });
+    }
 
-  // Pornire animare counter când secțiunea este vizibilă
-  const statsSection = document.getElementById('stats');
-  if (statsSection) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(document.getElementById('clientCounter'), 250);
-          animateCounter(document.getElementById('projectCounter'), 180);
-          animateCounter(document.getElementById('cameraCounter'), 1240);
-          animateCounter(document.getElementById('dataCounter'), 15.7);
-          observer.unobserve(entry.target);
+    // Scroll lin pentru link-uri ancoră
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        // Prevent default only if it's not the AI chat button
+        if (this.id !== 'openAIChatBtn') {
+          e.preventDefault();
+          if (navLinks) navLinks.classList.remove('active');
+          if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
         }
       });
-    }, { threshold: 0.5 });
-    observer.observe(statsSection);
-  }
+    });
 
-  // Initialize particles.js
-  particlesJS('particles-js', {
-    particles: {
-      number: { value: 80, density: { enable: true, value_area: 800 } },
-      color: { value: "#00f7ff" },
-      shape: { type: "circle" },
-      opacity: { value: 0.5, random: true },
-      size: { value: 3, random: true },
-      line_linked: { enable: true, distance: 150, color: "#00f7ff", opacity: 0.3, width: 1 },
-      move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
-    },
-    interactivity: {
-      detect_on: "canvas",
-      events: {
-        onhover: { enable: true, mode: "repulse" },
-        onclick: { enable: true, mode: "push" },
-        resize: true
+    // Navbar efect scroll + back to top button
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (navbar) {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+
+      const backToTop = document.getElementById('backToTop');
+      if (backToTop) {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('show');
+        } else {
+          backToTop.classList.remove('show');
+        }
+      }
+    });
+
+    // Animare counter
+    function animateCounter(element, target, duration = 2000) {
+      if (!element) return;
+      const start = 0;
+      const increment = target / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          clearInterval(timer);
+          current = target;
+        }
+        // Formatează numerele mari cu virgule, ex: 1,240
+        element.textContent = Math.floor(current).toLocaleString('ro-RO');
+        // Pentru TB date, adaugă o zecimală
+        if (element.id === 'dataCounter') {
+          element.textContent = (Math.round(current * 10) / 10).toLocaleString('ro-RO');
+        }
+      }, 16);
+    }
+
+    // Pornire animare counter când secțiunea este vizibilă
+    const statsSection = document.getElementById('stats');
+    if (statsSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(document.getElementById('clientCounter'), 250);
+            animateCounter(document.getElementById('projectCounter'), 180);
+            animateCounter(document.getElementById('cameraCounter'), 1240);
+            animateCounter(document.getElementById('dataCounter'), 15.7);
+            observer.unobserve(entry.target); // Oprește observarea după declanșare
+          }
+        });
+      }, { threshold: 0.5 }); // Declanșează când 50% din secțiune este vizibilă
+      observer.observe(statsSection);
+    }
+
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#00f7ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#00f7ff", opacity: 0.3, width: 1 },
+        move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        }
+      }
+    });
+
+    // Scroll la secțiunea hero la click pe săgeată
+    const heroScroll = document.getElementById('heroScroll');
+    if (heroScroll) {
+      heroScroll.addEventListener('click', function() {
+        window.scrollTo({
+          top: window.innerHeight, // Derulează la înălțimea ferestrei (prima secțiune)
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // Inițializare Swiper pentru testimoniale
+    const swiper = new Swiper('.mySwiper', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
+    });
+
+    // Funcție pentru afișarea mesajelor personalizate (înlocuiește alert)
+    function showMessageBox(title, message, isSuccess = true) {
+      const overlay = document.getElementById('messageBoxOverlay');
+      const titleElement = document.getElementById('messageBoxTitle');
+      const textElement = document.getElementById('messageBoxText');
+      const closeBtn = document.getElementById('messageBoxCloseBtn');
+
+      titleElement.textContent = title;
+      textElement.textContent = message;
+
+      // Poți adăuga stiluri diferite în funcție de succes/eroare
+      if (isSuccess) {
+        titleElement.style.color = 'var(--primary)';
+        overlay.querySelector('.message-box-content').style.borderColor = 'var(--primary)';
+      } else {
+        titleElement.style.color = 'var(--accent)';
+        overlay.querySelector('.message-box-content').style.borderColor = 'var(--accent)';
+      }
+
+      overlay.classList.add('show');
+
+      closeBtn.onclick = () => {
+        overlay.classList.remove('show');
+      };
+
+      // Închide la click în afara casetei de mesaj
+      overlay.onclick = (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove('show');
+        }
+      };
+    }
+
+    // Back to top button functionality (already present, but ensure it's here)
+    document.addEventListener('DOMContentLoaded', () => {
+      const backToTopBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add('show');
+        } else {
+          backToTopBtn.classList.remove('show');
+        }
+      });
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      backToTopBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // AI Chat Modal Logic
+    const openAIChatBtn = document.getElementById('openAIChatBtn');
+    const aiChatModalOverlay = document.getElementById('aiChatModalOverlay');
+    const aiChatCloseBtn = document.getElementById('aiChatCloseBtn');
+    const aiChatMessages = document.getElementById('aiChatMessages');
+    const aiChatInput = document.getElementById('aiChatInput');
+    const aiChatSendBtn = document.getElementById('aiChatSendBtn');
+    const aiChatLoading = document.getElementById('aiChatLoading');
+
+    let chatHistory = []; // Stores the chat history for the AI model
+
+    // Function to add a message to the chat display
+    function addMessageToChat(message, isUser = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('ai-chat-message');
+      if (isUser) {
+        messageDiv.classList.add('user');
+      }
+      messageDiv.textContent = message;
+      aiChatMessages.appendChild(messageDiv);
+      aiChatMessages.scrollTop = aiChatMessages.scrollHeight; // Scroll to bottom
+    }
+
+    // Function to send message to AI
+    async function sendMessageToAI() {
+      const userMessage = aiChatInput.value.trim();
+      if (userMessage === '') return;
+
+      addMessageToChat(userMessage, true); // Display user's message
+      chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+      aiChatInput.value = ''; // Clear input
+
+      aiChatLoading.style.display = 'block'; // Show loading indicator
+      aiChatSendBtn.disabled = true; // Disable send button
+
+      try {
+        const payload = { contents: chatHistory };
+        // IMPORTANT: Replace "YOUR_GEMINI_API_KEY" with your actual Gemini API key.
+        // You can obtain one from Google AI Studio: https://aistudio.google.com/app/apikey
+        const apiKey = "AIzaSyBBpZcebNo_QZJSmEYyubouuyk9Ck0hjjA";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (result.candidates && result.candidates.length > 0 &&
+            result.candidates[0].content && result.candidates[0].content.parts &&
+            result.candidates[0].content.parts.length > 0) {
+          const aiResponse = result.candidates[0].content.parts[0].text;
+          addMessageToChat(aiResponse); // Display AI's response
+          chatHistory.push({ role: "model", parts: [{ text: aiResponse }] });
+        } else {
+          addMessageToChat("Scuze, nu am putut genera un răspuns. Te rog încearcă din nou.");
+          console.error("Unexpected API response structure:", result);
+        }
+      } catch (error) {
+        console.error("Error calling Gemini API:", error);
+        addMessageToChat("A apărut o eroare la comunicarea cu AI-ul. Te rog încearcă din nou mai târziu.");
+      } finally {
+        aiChatLoading.style.display = 'none'; // Hide loading indicator
+        aiChatSendBtn.disabled = false; // Re-enable send button
       }
     }
-  });
 
-  // Scroll la secțiunea hero la click pe săgeată
-  const heroScroll = document.getElementById('heroScroll');
-  if (heroScroll) {
-    heroScroll.addEventListener('click', function() {
-      window.scrollTo({
-        top: window.innerHeight,
-        behavior: 'smooth'
+    // Event listeners for AI Chat Modal
+    if (openAIChatBtn) {
+      openAIChatBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default anchor behavior
+        aiChatModalOverlay.classList.add('show');
+        aiChatInput.focus(); // Focus on input when modal opens
       });
-    });
-  }
+    }
 
-  // Contact form handling
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const service = document.getElementById('service').value.trim();
-      
-      // Aici poți face request către server cu fetch/ajax
-      
-      console.log('Form submitted:', { name, email, service });
-      
-      alert('Mulțumim pentru mesaj! Echipa noastră te va contacta în cel mai scurt timp.');
-      
-      this.reset();
-    });
-  }
-</script>
-
-
-<div class="back-to-top" id="backToTop" aria-label="Back to top" role="button" tabindex="0">
-  <i class="fas fa-arrow-up"></i>
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const backToTopBtn = document.getElementById('backToTop');
-
-    // Afișează butonul când s-a derulat mai mult de 300px
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.classList.add('show');
-      } else {
-        backToTopBtn.classList.remove('show');
-      }
-    });
-
-    // Scroll lin la început când dai click
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Opțional: permite și activarea cu Enter (accesibilitate)
-    backToTopBtn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    });
-  });
-</script>
-
-<script>
-  (function(){
-    emailjs.init('0CQMCeTNMgQIoir_T'); // public key-ul tău
-  })();
-
-  window.onload = function() {
-    document.getElementById('contactForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      emailjs.sendForm('service_sakkbup', 'template_v8y6hhd', this)
-      .then(function() {
-        alert('Mesajul a fost trimis cu succes!');
-        document.getElementById('contactForm').reset();
-      }, function(error) {
-        alert('A apărut o eroare la trimiterea mesajului: ' + JSON.stringify(error));
+    if (aiChatCloseBtn) {
+      aiChatCloseBtn.addEventListener('click', () => {
+        aiChatModalOverlay.classList.remove('show');
       });
-    });
-  }
-</script>
+    }
+
+    if (aiChatModalOverlay) {
+      aiChatModalOverlay.addEventListener('click', (e) => {
+        if (e.target === aiChatModalOverlay) {
+          aiChatModalOverlay.classList.remove('show');
+        }
+      });
+    }
+
+    if (aiChatSendBtn) {
+      aiChatSendBtn.addEventListener('click', sendMessageToAI);
+    }
+
+    if (aiChatInput) {
+      aiChatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          sendMessageToAI();
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
-
